@@ -11,7 +11,7 @@ import java.util.List;
 public class CustomerService {
 
     private List<Customer> cust = CustomerDAO.getCust();
-
+    CustomerDAO customerDAO = new CustomerDAO();
    /* public CustomerService() {
         cust.put(1L, new Customer(1, "Rachit", "rachit@gmail.com", "328389933"));
         cust.put(2L, new Customer(1, "Rachit", "rachit@gmail.com", "328389933"));
@@ -24,8 +24,8 @@ public class CustomerService {
         return cust;
     }
 
-    public Customer save(Customer customer) {
-        return customer;
+    public void save(Customer customer) {
+            customerDAO.save(customer);
     }
 
     public Customer update(Customer customer) {
