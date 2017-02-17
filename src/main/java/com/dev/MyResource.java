@@ -3,16 +3,17 @@ package com.dev;
 import com.dev.domain.Customer;
 import com.dev.service.CustomerService;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("myresource")
+@Path("/customer")
 public class MyResource {
 
     /**
@@ -24,9 +25,25 @@ public class MyResource {
     CustomerService customerService = new CustomerService();
 
     @GET
+    @Path("/all")
     @Produces(MediaType.APPLICATION_XML)
     public List<Customer> getIt() {
         return customerService.getAll();
     }
 
+    @POST
+    @Path("/add")
+    @Produces(MediaType.TEXT_HTML)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void add(@FormParam("cname") String name,
+                    @FormParam("email") String email,
+                    @FormParam("phone") String phone,
+                    @Context HttpServletResponse servletResponse) throws IOException {
+        Customer customer = new Customer(name, email, phone);
+        customerService.save(customer);
+        System.out.println(customer.toString());
+        servletResponse.sendRedirect("./all");
+
+
+    }
 }
