@@ -23,7 +23,7 @@ public class CustomerDAO {
         try {
 
             trns = session.beginTransaction();
-            users = session.createQuery("from Customer").list();
+            users = session.createQuery("from Customer ").list();
 
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -33,6 +33,21 @@ public class CustomerDAO {
         }
 
         return users;
+    }
+
+    public Customer save(Customer customer) {
+        Transaction trans = null;
+        Session session = HibernateUtil.getSession();
+        try {
+            trans = session.beginTransaction();
+            session.persist(customer);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            trans.commit();
+            session.close();
+        }
+        return customer;
     }
 }
 
