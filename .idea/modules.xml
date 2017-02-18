@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://F://RestCRUD/RestCRUD.iml" filepath="F://RestCRUD/RestCRUD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RestCRUD.iml" filepath="$PROJECT_DIR$/RestCRUD.iml" />
     </modules>
   </component>
 </project>

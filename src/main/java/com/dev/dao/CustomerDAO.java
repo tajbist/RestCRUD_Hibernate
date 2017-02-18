@@ -44,6 +44,7 @@ public class CustomerDAO {
         } catch (RuntimeException e) {
             e.printStackTrace();
         } finally {
+
             trans.commit();
             session.close();
         }
