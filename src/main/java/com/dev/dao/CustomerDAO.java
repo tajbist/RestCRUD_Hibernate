@@ -35,6 +35,39 @@ public class CustomerDAO {
         return users;
     }
 
+    public Customer getById(int id) {
+        Transaction trns = null;
+        Session session = HibernateUtil.getSession();
+        Customer cust = null;
+        try {
+            trns = session.beginTransaction();
+            cust = ( Customer ) session.createQuery("from Customer c").list().get(id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cust;
+    }
+
+    public Customer remove(int id) {
+        Transaction trns = null;
+        Session session = HibernateUtil.getSession();
+        Customer cust = null;
+        try {
+            trns = session.beginTransaction();
+            cust = ( Customer ) session.createQuery("from Customer c where c.id=:id")
+                    .setParameter("id", id);
+            session.delete(cust);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            trns.commit();
+            session.close();
+        }
+        return cust;
+    }
+
     public Customer save(Customer customer) {
         Transaction trans = null;
         Session session = HibernateUtil.getSession();

@@ -2,7 +2,7 @@
 <body>
 <div style="text-align: center">
     <h2>Jersey RESTful Web Application!</h2>
-    <p><a href="webapi/customer/all">Rest Resources : XML All Customer</a>
+    <p><a href="webapi/customers">Rest Resources : XML All Customer</a>
     <p><a href="http://www.developernepal.com">DeveloperZone</a>
 
 </div>

@@ -25,18 +25,18 @@ public class CustomerService {
     }
 
     public void save(Customer customer) {
-            customerDAO.save(customer);
+        customerDAO.save(customer);
     }
 
     public Customer update(Customer customer) {
         return customer;
     }
 
-    public Customer get(Customer customer) {
-        return customer;
+    public Customer getById(int id) {
+        return customerDAO.getById(id);
     }
 
-    public Customer remove(Customer customer) {
-        return customer;
+    public Customer remove(int id) {
+        return customerDAO.remove(id);
     }
 }
