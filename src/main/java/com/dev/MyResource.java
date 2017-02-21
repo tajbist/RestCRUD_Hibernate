@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("/customer")
+@Path("/customers")
 public class MyResource {
 
     /**
@@ -25,10 +25,24 @@ public class MyResource {
     CustomerService customerService = new CustomerService();
 
     @GET
-    @Path("/all")
     @Produces(MediaType.APPLICATION_XML)
     public List<Customer> getIt() {
         return customerService.getAll();
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_XML)
+    public Customer getById(@PathParam("id") int id) {
+        return customerService.getById(id);
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    @Produces(MediaType.APPLICATION_XML)
+    public Customer deleteById(@PathParam("id")int id){
+        Customer cust=customerService.remove(id);
+        return cust;
     }
 
     @POST
@@ -42,7 +56,7 @@ public class MyResource {
         Customer customer = new Customer(name, email, phone);
         customerService.save(customer);
         System.out.println(customer.toString());
-        servletResponse.sendRedirect("./all");
+        servletResponse.sendRedirect("./");
 
 
     }
